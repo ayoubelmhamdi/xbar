@@ -4,6 +4,29 @@ SRC=src
 OBJ=build
 SRCS=$(wildcard $(SRC)/*.c)
 OBJS=$(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
+
+# TEST
+TEST=test
+TESTS=$(wildcard $(TEST)/*.c)
+TESTBINS=$(patsubst $(TEST)/%.c, $(TEST)/%, $(TESTS))
+
+$(TEST)/bin/%: $(TEST)/%.c
+	$(CC) $(CFLAGS) $< $(OBJS) -o $@ -lcriterion
+
+$(TEST)/bin:
+	mkdir -p $@
+
+test: $(LIB) $(TEST)/bin $(TESTBINS)
+	for test in $(TESTBINS);do ./$$test ;done
+
+# lib
+LIBDIR=lib
+LIB=$(LIBDIR)/afile.a
+$(LIBDIR):
+	mkdir -p $@
+
+
+# main
 BINDIR=bin
 BIN=$(BINDIR)/main
 
