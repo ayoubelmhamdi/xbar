@@ -1,16 +1,25 @@
 CC=gcc
 CFLAGS=-g -Wall
-OBJS=build/a.o build/b.o
-BIN=build/bin/main
+SRC=src
+OBJ=build
+SRCS=$(wildcard $(SRC)/*.c)
+OBJS=$(patsubst $(SRC)/%.c, $(OBJ)/%.o, $(SRCS))
+BINDIR=bin
+BIN=$(BINDIR)/main
 
 all:$(BIN)
 
-build/bin/main: $(OBJS)
-	mkdir -p build/bin
+$(BIN): $(OBJS)
+	@mkdir -p build
+	@mkdir -p bin
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
-build/%.o: src/%.c
+$(OBJ)/%.o: $(SRC)/%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	$(RM) -r build/*
+
+release: CFLAGS=-Wall -O2 -DNDEBUG
+release: clean
+release: $(BIN)
