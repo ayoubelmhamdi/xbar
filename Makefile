@@ -13,26 +13,27 @@ all:$(BIN)
 
 
 # lib
+# not tested yet for main.c and test.c
 LIBDIR=lib
 LIB=$(LIBDIR)/afile.a
 
 $(LIBDIR):
-	mkdir -p $@
+	@mkdir -pv $@
 
 
 $(OBJ)/bin:
-	mkdir -p $@
+	mkdir -pv $@
 
 $(BIN): $(OBJS)
-	@mkdir -p build
-	@mkdir -p bin
 	$(CC) $(CFLAGS) $(OBJS) -o $@
 
 $(OBJ)/%.o: $(SRC)/%.c
+	@mkdir -pv build
+	@mkdir -pv bin
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	$(RM) -r build/*
+	@$(RM) -rv build/*
 
 
 # TEST
@@ -46,7 +47,7 @@ $(TEST)/bin/%: $(TEST)/%.c
 $(TEST)/bin:
 	mkdir -p $@
 
-test: $(LIB) $(TEST)/bin $(TESTBINS)
+test: $(TEST)/bin $(TESTBINS)
 	for test in $(TESTBINS);do ./$$test ;done
 
 # release
