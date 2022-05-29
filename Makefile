@@ -34,6 +34,9 @@ $(OBJ)/%.o: $(SRC)/%.c
 clean:
 	@$(RM) -rv build/*
 
+purge:
+	@$(RM) -rv bin build
+
 
 # TEST
 TEST=test
