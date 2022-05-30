@@ -1,3 +1,4 @@
+# add this line
 CC=gcc
 CFLAGS=-g -Wall -lcriterion
 SRC=src
