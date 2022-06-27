@@ -1,4 +1,3 @@
-# add this line
 CC=gcc
 CFLAGS=-g -Wall -lcriterion
 SRC=src
@@ -63,7 +62,8 @@ tests_run:
 	@$(CC) *.o -lcriterion -lgcov -o bin/$(TEST2)
 	@echo 'msg'
 	@rm -f *.o
-	@./bin/$(TEST2)
+	@echo 'sleep' && sleep 3 && clear
+	@./bin/$(TEST2) || sleep 4
 
 # release
 release: CFLAGS=-Wall -O2 -DNDEBUG
