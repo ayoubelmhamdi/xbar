@@ -1,7 +1,18 @@
-#include<stdio.h>
+#include "util.h"
+#include <stdio.h>
 
-int main(int argv, char* argc[]){
-    int i=2;
-    printf("i=%d\n",i);
-    return 0;
+int main(int argv, char *argc[]) {
+  view_output();
+  view_nvim();
+  // view_pbattery();
+  // view_sbattery();    printf("|");
+  view_ip();
+  printf("|");
+  view_cpu();
+  printf("|");
+  view_ram();
+  printf("|");
+  view_time();
+
+  return 0;
 }
