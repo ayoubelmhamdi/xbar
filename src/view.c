@@ -8,13 +8,13 @@
 void view_ram() {
   char s[MAX];
   sprintf(s, "%d", ram());
-  printf(" %04sMb ", s);
+  printf(" %4sMb ", s);
 }
 
 void view_cpu() {
   char s[MAX];
   sprintf(s, "%d", cpu());
-  printf("%03s%% ", s);
+  printf("%3s%% ", s);
 }
 
 void view_time() {
@@ -26,13 +26,13 @@ void view_time() {
 void view_pbattery(){
   char s[MAX];
   sprintf(s, "%d", pbattery());
-  printf("%03s%%", s);
+  printf("%3s%%", s);
 }
 
 void view_sbattery(){
   char s[MAX];
   sbattery(s);
-  printf(" %01s ", s);
+  printf(" %1s ", s);
 }
 
 void view_ip(){
