@@ -45,7 +45,6 @@ int fgetint(char *file) {
     exit(EXIT_FAILURE);
   }
   char line[MAXLINE];
-  int i = 0;
   int x = 0;
 
   fgets(line, sizeof(line), fp);
