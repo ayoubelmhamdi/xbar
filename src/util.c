@@ -77,8 +77,8 @@ void date(char *s) {
   sprintf(min, "%02d", tm.tm_min);
   sprintf(sec, "%02d", tm.tm_sec);
   sprintf(day, "%02d", tm.tm_mday);
-  sprintf(month, "%02d", tm.tm_mon);
-  strcat(strcat(strcat(strcat(strcat(strcat(strcat(strcat(strcat(s, day), "/"), month), "/2020 "), hour), ":"), min), ":"), sec);
+  sprintf(month, "%02d", tm.tm_mon+1);
+  strcat(strcat(strcat(strcat(strcat(strcat(strcat(strcat(strcat(s, day), "/"), month), "/2022 "), hour), ":"), min), ":"), sec);
 }
 
 int pbattery() {
