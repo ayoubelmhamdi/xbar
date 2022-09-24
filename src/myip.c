@@ -1,3 +1,4 @@
+#include <stdio.h>
 #include <string.h> /* for strncpy */
 #include <unistd.h>
 
@@ -8,9 +9,7 @@
 #include <sys/socket.h>
 #include <sys/types.h>
 
-
-
-void myip(char s[]) {
+void dev_ip(char name_wifi[], char s[]) {
   int fd;
   struct ifreq ifr;
   fd = socket(AF_INET, SOCK_DGRAM, 0);
@@ -19,10 +18,23 @@ void myip(char s[]) {
   ifr.ifr_addr.sa_family = AF_INET;
 
   /* I want IP address attached to "eth0","wlan0","wlp3s0" */
-  strncpy(ifr.ifr_name, "wlp3s0", IFNAMSIZ - 1);
+  strncpy(ifr.ifr_name, name_wifi, IFNAMSIZ - 1);
   ioctl(fd, SIOCGIFADDR, &ifr);
   close(fd);
   /* return result */
-  strcpy(s,inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr));
+  strcpy(s, inet_ntoa(((struct sockaddr_in *)&ifr.ifr_addr)->sin_addr));
+}
+
+void myip(char s[]) {
+    // TODO: improve
+    // get the name of the wlan automatique
+  char null_wifi[] = "0.0.0.0";
+  dev_ip("wlan0", s);
+  if (strcmp(s, null_wifi) == 0) {
+    dev_ip("wlp3s0", s);
+  }
+  if (strcmp(s, null_wifi) == 0) {
+    dev_ip("eth0", s);
+  }
 }
 
