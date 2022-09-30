@@ -72,13 +72,37 @@ void date(char *s) {
   /* printf("%02d:%02d:%02d\n", tm.tm_hour, tm.tm_min, tm.tm_sec); */
   strcpy(s, "");
 
-  char hour[80], min[80], sec[80], day[80], month[80];
+  char hour[80], min[80], sec[80], day[80], month[80],name_day[4];
   sprintf(hour, "%02d", tm.tm_hour);
   sprintf(min, "%02d", tm.tm_min);
   sprintf(sec, "%02d", tm.tm_sec);
   sprintf(day, "%02d", tm.tm_mday);
   sprintf(month, "%02d", tm.tm_mon+1);
-  strcat(strcat(strcat(strcat(strcat(strcat(strcat(strcat(strcat(s, day), "/"), month), "/2022 "), hour), ":"), min), ":"), sec);
+  switch (tm.tm_wday) {
+    case 0:
+      strcpy(name_day, "Sun");
+      break;
+    case 1:
+      strcpy(name_day, "Mon");
+      break;
+    case 2:
+      strcpy(name_day, "Tue");
+      break;
+    case 3:
+      strcpy(name_day, "Wed");
+      break;
+    case 4:
+      strcpy(name_day, "Thu");
+      break;
+    case 5:
+      strcpy(name_day, "Fri");
+      break;
+    case 6:
+      strcpy(name_day, "Sat");
+      break;
+  } 
+
+  strcat(strcat(strcat(strcat(strcat(strcat(strcat(strcat(strcat(s, day), " "), name_day), " "), hour), ":"), min), ":"), sec);
 }
 
 int pbattery() {
